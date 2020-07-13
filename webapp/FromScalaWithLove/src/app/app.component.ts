@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ArrayEnhanced } from "scala-module";
+import { ArrayEnhanced, EmitRxObservable } from "scala-module";
 
 @Component({
   selector: "app-root",
@@ -9,10 +9,12 @@ import { ArrayEnhanced } from "scala-module";
 export class AppComponent {
   title = "FromScalaWithLove";
 
-  constructor(arrayEnhanced: ArrayEnhanced) {
+  constructor(arrayEnhanced: ArrayEnhanced, emitRx: EmitRxObservable) {
     const x = [1, 2, 3, 1, 2];
 
     console.log(arrayEnhanced.distinct(x));
     console.log(arrayEnhanced.distinctBy(x, (e) => e % 2));
+
+    emitRx.naturalNumbers.forEach((e) => console.log(e));
   }
 }

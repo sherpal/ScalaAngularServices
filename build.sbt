@@ -26,3 +26,7 @@ copyFileTask := {
 }
 
 addCommandAlias("makeModule", ";scalaTsFastOpt;copyFileTask")
+
+Compile / npmDependencies ++= Seq("rxjs" -> "6.4.0")
+
+useYarn := true

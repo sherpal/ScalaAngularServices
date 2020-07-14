@@ -11,13 +11,13 @@ import scala.scalajs.js.annotation.{JSExportAll, JSExportTopLevel}
 @JSExportAll
 final class EmitRxObservable {
 
-  private val subject = new BehaviorSubject[Int](0)
+  private val subject = new BehaviorSubject(0)
 
   /** Returns an observable emitting all natural numbers, starting from 0, and updating every second. */
   @inline def naturalNumbers: Observable[Int] = subject
 
   setInterval(1.second) {
-    subject.next(subject.getValue() + 1)
+    subject.next(subject.getValue + 1)
   }
 
 }

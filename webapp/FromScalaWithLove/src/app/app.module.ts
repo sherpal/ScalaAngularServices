@@ -1,13 +1,13 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { ArrayEnhanced, EmitRxObservable } from "scala-module";
+import { ArrayEnhanced, EmitRxObservable, UserService } from "scala-module";
 
 import { AppComponent } from "./app.component";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule],
-  providers: [ArrayEnhanced, EmitRxObservable],
+  providers: [ArrayEnhanced, EmitRxObservable, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

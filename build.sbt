@@ -30,3 +30,6 @@ addCommandAlias("makeModule", ";scalaTsFastOpt;copyFileTask")
 Compile / npmDependencies ++= Seq("rxjs" -> "6.4.0")
 
 useYarn := true
+
+libraryDependencies += "dev.zio" %%% "zio" % "1.0.0-RC21-2"
+libraryDependencies += "io.github.cquiroz" %%% "scala-java-time" % "2.0.0"

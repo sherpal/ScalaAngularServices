@@ -1,1 +1,10 @@
 <h1>From Scala, with love</h1>
+
+<div>
+  <button (click)="start()">Start</button>
+  <progress [value]="progress$ | async" max="100"></progress>
+  <button (click)="cancel()">Cancel</button>
+</div>
+<pre>
+  {{ result$ | async }}
+</pre>

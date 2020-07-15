@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-import { ZIOService } from "scala-module";
-import { of } from "rxjs";
-import { delay, tap } from "rxjs/operators";
+import { ZIOService, withzio } from "scala-module";
+import { of, Observable, Subject } from "rxjs";
+import { delay, tap, flatMap } from "rxjs/operators";
 
 @Component({
   selector: "app-root",
@@ -11,7 +11,20 @@ import { delay, tap } from "rxjs/operators";
 export class AppComponent {
   title = "FromScalaWithLove";
 
-  constructor(zioService: ZIOService) {
+  public readonly completionStates$: Subject<
+    withzio.CompletionState<number>
+  > = new Subject();
+  public readonly progress$: Observable<number>;
+  public readonly result$: Observable<Array<number>>;
+
+  public cancel: () => void = () => {};
+
+  constructor(private zioService: ZIOService) {
+    this.progress$ = this.completionStates$.pipe(flatMap((cs) => cs.progress));
+    this.result$ = this.completionStates$.pipe(flatMap((cs) => cs.result));
+  }
+
+  public start(): void {
     const program = (j: number) =>
       of(j).pipe(
         delay(1000),
@@ -24,18 +37,15 @@ export class AppComponent {
         tap((e) => console.log(e))
       );
 
-    const completionState = zioService.foreachParN(
+    const completionState = this.zioService.foreachParN(
       [...new Array(30).keys()],
       program,
       2,
       3
     );
 
-    completionState.progress.forEach((p) => console.log("progress", p));
-    completionState.result.forEach((r) => console.log("result", r));
+    this.cancel = completionState.cancel;
 
-    // setTimeout(() => {
-    //   completionState.cancel();
-    // }, 1500);
+    this.completionStates$.next(completionState);
   }
 }

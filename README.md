@@ -2,7 +2,7 @@
 
 This is a demonstration of the possibilities of using [Scala](https://www.scala-lang.org/) for making [Angular](https://angular.io/).
 
-This repo is used as illustration for the medium blog post available [here](todo). The commits of this repo follow the content of that article, and present a nice history of things.
+This repo is used as illustration for the medium blog post available [here](https://medium.com/@antoine.doeraene/writing-angular-services-in-scala-e83fd308b7c3). The commits of this repo follow the content of that article, and present a nice history of things.
 
 ## Run it
 
